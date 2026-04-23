@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+sqlalchemy
+pymysql
+redis
+langchain
+httpx
+python-dotenv
+loguru
+pytest

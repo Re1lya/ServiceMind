@@ -1,0 +1,1 @@
+"""ServiceMind backend application package."""
