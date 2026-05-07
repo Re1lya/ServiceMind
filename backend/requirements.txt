@@ -4,9 +4,13 @@ pydantic
 pydantic-settings
 sqlalchemy
 pymysql
+cryptography
 redis
 langchain
 httpx
 python-dotenv
 loguru
 pytest
+numpy
+faiss-cpu
+jieba

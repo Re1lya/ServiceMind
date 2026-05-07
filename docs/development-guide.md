@@ -25,18 +25,18 @@
 - FastAPI 应用入口
 - API 分层目录
 - Agent / RAG / Tools / Services / Repositories 等模块占位
+- Vue 3 前端工程骨架
+- 前端健康检查与聊天工作台联调页面
 
 当前仓库尚未完成：
 
-- 真实数据库连接
-- ORM 字段定义
-- 接口请求与响应模型细化
-- Agent 实际编排逻辑
-- RAG 实际检索能力
-- 工具调用实现
-- 前端工程
+- 生产级数据库与 Redis 部署配置
+- 流式输出与前端增量渲染
+- 更完整的 Agent 编排策略
+- 更完整的 RAG 向量化与重排序能力
+- 投诉登记、人工接管和管理端页面
 
-也就是说，现在这个项目已经具备了“可持续开发的骨架”，但还没有进入“功能实现阶段”。
+也就是说，现在这个项目已经从“纯骨架”进入“可联调的 MVP 主链路”阶段，前端可以验证健康检查、聊天请求、订单/物流工具路由和后端兜底能力。
 
 ## 3. 后端目录详细说明
 
@@ -61,6 +61,40 @@ backend/
 ├─ .env.example
 └─ requirements.txt
 ```
+
+## 4. 前端目录详细说明
+
+```text
+frontend/
+├─ src/
+│  ├─ assets/
+│  ├─ router/
+│  ├─ services/
+│  ├─ stores/
+│  ├─ types/
+│  ├─ views/
+│  ├─ App.vue
+│  └─ main.ts
+├─ index.html
+├─ package.json
+├─ tsconfig.json
+└─ vite.config.ts
+```
+
+前端当前采用 `Vue 3 + TypeScript + Vite`，并以 `Vue Router + Pinia + Axios` 组成基础生态。
+
+- `src/views/WorkbenchView.vue`
+  - 用户侧客服工作台，负责健康状态展示、示例问题入口、消息列表和输入区。
+- `src/stores/chat.ts`
+  - 管理会话 ID、消息列表、发送状态、健康检查结果和错误信息。
+- `src/services/http.ts`
+  - Axios 基础实例，默认请求 `/api/v1`。
+- `src/services/chatApi.ts`
+  - 封装 `GET /health` 与 `POST /chat/`。
+- `src/types/api.ts`
+  - 对齐后端统一响应体、健康检查响应和聊天响应结构。
+- `vite.config.ts`
+  - 开发期将 `/api` 代理到后端 `http://127.0.0.1:8000`；生产构建默认使用 `/console/` base，便于由 FastAPI 静态挂载。
 
 ### 3.1 `app/main.py`
 
@@ -264,6 +298,11 @@ backend/
 - `import_seed_data.py`
 - `reindex_kb.py`
 - `backfill_sessions.py`
+- `evaluate_retrieval.py`
+- `evaluate_answer.py`
+- `evaluate_tools.py`
+
+离线数据处理脚本的最小目标是：从 `data/raw` 批量读取原始知识文档，完成文本清洗、语义分块、embedding 生成、FAISS 索引重建，并输出文档数、chunk 数、失败数和耗时。所有离线脚本都应保留可追踪日志，避免只在接口请求时临时处理数据。
 
 ### 3.14 `tests/`
 
@@ -278,7 +317,7 @@ backend/
 - chat 主链路 smoke test
 - 检索模块基本测试
 
-## 4. 请求处理链路
+## 5. 请求处理链路
 
 以“用户问：我的订单什么时候到？”为例，推荐请求链路如下：
 
@@ -300,7 +339,7 @@ backend/
 - Tool 层不负责拼最终用户文案
 - Agent 层负责“理解与编排”
 
-## 5. 推荐数据模型设计
+## 6. 推荐数据模型设计
 
 以下是当前最值得优先落地的 4 张核心表。
 
@@ -398,7 +437,7 @@ backend/
 - `created_at`
   - 工具调用时间，用于排查问题和生成时序日志。
 
-## 5.5 表结构设计补充建议
+## 6.5 表结构设计补充建议
 
 为了减少后续返工，建表时建议同时注意这几点：
 
@@ -411,7 +450,7 @@ backend/
 - 时间字段统一为 `datetime`
   - 便于排序、审计和运维排查。
 
-## 6. 文件与函数级开发视角
+## 7. 文件与函数级开发视角
 
 如果你更习惯“看文件和函数来理解项目”，建议把后端功能按下面这套方式理解。
 
@@ -503,7 +542,7 @@ backend/
 
 如果后面你决定改函数名，建议同步改动本文档和 `architecture.md`，避免文档与实现脱节。
 
-## 7. 接口设计建议
+## 8. 接口设计建议
 
 建议统一响应结构，避免后续前后端联调混乱。
 
@@ -552,12 +591,63 @@ backend/
     "session_id": "sess_xxx",
     "reply": "TODO",
     "route": "logistics_query",
-    "trace_id": "trace_xxx"
+    "answer_source": "tool",
+    "trace_id": "trace_xxx",
+    "user_message_id": "msg_xxx",
+    "assistant_message_id": "msg_xxx",
+    "knowledge_sources": []
   }
 }
 ```
 
-## 8. 开发优先级建议
+知识问答命中时，`knowledge_sources` 会返回本次注入回答上下文的知识片段：
+
+```json
+{
+  "document_id": "doc_xxx",
+  "title": "退款规则",
+  "source_type": "text",
+  "source_path": "data/raw/refund.md",
+  "score": 6.0,
+  "snippet": "平台支持七天无理由退款，商品需要保持完好。"
+}
+```
+
+当前 RAG 是最小可用向量实现：上传和重建会先清洗文本，再按长度切成可检索片段，然后生成 embedding 并重建本地 FAISS 索引。检索时优先走 FAISS 向量召回；如果 FAISS 不可用、没有有效命中，或索引与当前数据库记录不同步，则回退到轻量词法评分。聊天链路把 top hits 注入 LLM prompt，并把来源返回给前端。后续若切换 Chroma/Milvus/Qdrant，应优先保持 `knowledge_sources` 响应结构稳定。
+
+FAISS 相关文件：
+
+- `data/vector_store/servicemind.faiss`
+  - 本地向量索引文件。
+- `data/vector_store/metadata.json`
+  - 向量位置与知识片段元数据的映射。
+- `backend/app/rag/embeddings.py`
+  - 负责 OpenAI-compatible embedding 调用；未配置可用服务时使用本地哈希 embedding 兜底。
+- `backend/app/rag/vector_store.py`
+  - 负责 FAISS 索引重建、加载和相似度查询。
+
+## 9. 开发优先级建议
+
+### 当前前端联调命令
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+开发服务默认访问 `http://127.0.0.1:5173/console/`，并通过 Vite proxy 将 `/api` 转发到后端 `http://127.0.0.1:8000`。
+
+生产托管验证：
+
+```powershell
+cd frontend
+npm run build
+cd ../backend
+.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+构建后的工作台由后端挂载到 `http://127.0.0.1:8000/console/`。
 
 ### 第一阶段：把服务跑起来
 
@@ -586,13 +676,15 @@ backend/
 
 - 完成知识文档导入
 - 文本切分
-- embedding
-- 向量检索
+- 基础来源追踪
+- embedding 生成
+- FAISS 本地向量召回
+- 轻量词法回退
 - 将检索结果拼入 prompt
 
 目标：
 
-- FAQ 类问题能根据知识库回答
+- FAQ 类问题能根据知识库回答，并在前端展示来源片段
 
 ### 第四阶段：接入工具调用
 
@@ -615,7 +707,111 @@ backend/
 
 - 系统可演示、可排错、可迭代
 
-## 9. 推荐编码约束
+### 第六阶段：补离线数据处理 pipeline
+
+- 完善 `backend/scripts/build_kb.py`
+- 支持从 `data/raw` 批量读取 TXT/Markdown，后续扩展 PDF/DOCX
+- 在 `backend/app/rag/ingestion.py` 统一清洗、切分和元数据打标
+- 调用 `backend/app/rag/embeddings.py` 生成 embedding
+- 调用 `backend/app/rag/vector_store.py` 重建 FAISS 索引
+- 记录每个文档的处理状态、chunk 数、失败原因和处理耗时
+- 输出一次构建报告，后续同步写入 [evaluation-report.md](/D:/pythoncode/ServiceMind/docs/evaluation-report.md)
+
+目标：
+
+- 知识库构建从“接口即时处理”升级为“可重复运行的离线处理链路”
+- 后续面试或复盘时能说明原始数据如何变成 Agent/RAG 可用数据
+
+本地运行命令：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\build_kb.py --input ..\data\raw --report ..\data\reports\kb_build_report.md --init-db
+```
+
+### 第七阶段：补阶段效果验证
+
+- 新建 `data/eval/retrieval_questions.json`，沉淀固定检索问题集
+- 新建 `backend/scripts/evaluate_retrieval.py`，统计 Hit@1、Recall@3、Recall@5、MRR
+- 新建 `data/eval/answer_questions.json`，验证回答是否引用来源、是否覆盖关键点、是否出现无依据内容
+- 新建 `data/eval/tool_cases.json`，验证订单、物流、投诉等工具选择是否正确
+- 每次调整 RAG、Prompt、Agent 路由后，都把结果写入 [evaluation-report.md](/D:/pythoncode/ServiceMind/docs/evaluation-report.md)
+
+目标：
+
+- 不再只说“加了 HyDE、BM25、Rerank”，而是能说明每个策略对召回和回答质量有没有提升
+- 形成 Baseline -> 优化策略 -> 指标对比 -> 错误样本复盘的闭环
+
+### 第八阶段：接入本地 Ollama Qwen 做 RAG 增强回答
+
+当前后端 LLM 客户端兼容 OpenAI 风格接口，因此本地 Ollama 可以通过 `/v1/chat/completions` 直接接入。
+
+推荐 `.env` 配置：
+
+```env
+LLM_API_BASE=http://127.0.0.1:11434/v1
+LLM_API_KEY=ollama
+LLM_MODEL_NAME=qwen3:8b
+LLM_TIMEOUT_SECONDS=120
+LLM_STRIP_THINKING=true
+```
+
+当前 RAG 回答链路：
+
+1. `chat_service.handle_chat_request()` 根据用户问题调用 `retrieve_documents()`。
+2. 检索结果被转换为 `knowledge_context`。
+3. `orchestrator.run_chat_flow_with_context()` 将知识库来源注入 RAG system prompt。
+4. 本地 Qwen 生成回答。
+5. `extract_chat_text()` 会清理 Qwen3 可能输出的 `<think>...</think>` 思考块。
+6. 接口返回 `answer_source=rag_llm` 和 `knowledge_sources`，前端可展示来源片段。
+
+不启动前端时，可以直接用脚本验证本地 RAG 问答：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\build_kb.py --input ..\data\raw --report ..\data\reports\kb_build_report.md --database-url sqlite:///../data/reports/retrieval_eval.sqlite --init-db
+.venv\Scripts\python.exe scripts\run_rag_chat.py "商品已经拆封还能直接退款吗？" --top-k 3 --source metadata
+```
+
+如果输出 `Answer source: rag_llm`，说明已经完成“检索增强 + 本地模型回答”闭环。如果输出 `fallback`，优先检查 Ollama 是否启动、模型名是否与 `ollama list` 一致、`LLM_API_BASE` 是否带 `/v1`。
+
+接入 Qwen 后，可以用真实 LLM 模式复跑回答质量评估：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\evaluate_answer.py --dataset ..\data\eval\answer_questions.json --report ..\data\reports\answer_eval_qwen.json --top-k 3 --source metadata --mode llm
+```
+
+`--mode extractive` 用来测检索来源本身是否完整，`--mode llm` 用来测最终模型回答是否仍然覆盖关键点、忠于来源并正确兜底。
+
+`evaluate_answer.py` 会在报告中输出 `retrieval_latency_ms`、`generation_latency_ms` 和 `latency_ms`：
+
+- `retrieval_latency_ms`：检索召回耗时。
+- `generation_latency_ms`：回答生成耗时；在 `--mode llm` 下基本就是本地 Qwen 调用耗时。
+- `latency_ms`：本轮评估总耗时。
+
+如果总耗时过高，优先看 `generation_latency_ms` 是否明显大于检索耗时。当前本地 Qwen 开发环境中，RAG 检索通常是百毫秒级，真实模型生成是秒级。
+
+### 第九阶段：工具调用评估
+
+工具评估用于验证订单、物流等业务办理链路是否稳定，覆盖 route、tool、status、slot 和回复片段。
+
+固定测试集位于：
+
+```text
+data/eval/tool_cases.json
+```
+
+运行命令：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\evaluate_tools.py --dataset ..\data\eval\tool_cases.json --report ..\data\reports\tool_eval_report.json --source ephemeral
+```
+
+`--source ephemeral` 会创建临时 SQLite 评估库，适合本地快速验证；如果要评估真实业务库和历史日志，可以改用 `--source database`。
+
+## 10. 推荐编码约束
 
 - API 层不写业务逻辑
 - Service 层不直接操作 request 对象
@@ -625,7 +821,7 @@ backend/
 - 所有异常尽量转换成统一业务异常
 - 所有关键链路保留 `trace_id`
 
-## 10. 常见开发坑
+## 11. 常见开发坑
 
 ### 10.1 把业务逻辑全堆进接口层
 
@@ -667,7 +863,7 @@ backend/
 
 - 保留请求、检索、工具、回复四类日志
 
-## 11. 你接下来最应该做什么
+## 12. 你接下来最应该做什么
 
 如果你想按最稳的方式推进，建议直接照这个顺序开发：
 
@@ -683,8 +879,11 @@ backend/
 10. 完善 [backend/app/rag/retriever.py](/D:/pythoncode/ServiceMind/backend/app/rag/retriever.py)
 11. 完善 [backend/app/tools/order_query.py](/D:/pythoncode/ServiceMind/backend/app/tools/order_query.py)
 12. 完善 [backend/app/tools/logistics_query.py](/D:/pythoncode/ServiceMind/backend/app/tools/logistics_query.py)
+13. 完善 [backend/scripts/build_kb.py](/D:/pythoncode/ServiceMind/backend/scripts/build_kb.py)，形成离线索引构建入口
+14. 新增 `backend/scripts/evaluate_retrieval.py`，形成固定检索评估入口
+15. 维护 [docs/evaluation-report.md](/D:/pythoncode/ServiceMind/docs/evaluation-report.md)，持续记录阶段验证结果和召回数据
 
-## 12. 文档维护建议
+## 13. 文档维护建议
 
 后续每实现一个模块，建议同步更新三类信息：
 

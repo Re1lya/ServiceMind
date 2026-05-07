@@ -38,6 +38,10 @@ flowchart TD
     C --> M["会话记录 MySQL"]
     G --> N["知识库与向量索引"]
     D --> O["日志与监控"]
+    P["离线数据处理 pipeline"] --> N
+    Q["阶段效果评估"] --> G
+    Q --> H
+    Q --> O
 ```
 
 ## 2. 业务流程说明
@@ -58,6 +62,8 @@ flowchart TD
 - `Agent 编排层 -> MCP 工具服务 -> 业务系统 -> 业务结果`
 - `检索结果/业务结果 -> LLM -> 最终回复`
 - `会话记录/日志/埋点 -> MySQL + 日志系统`
+- `原始知识文档 -> 离线清洗/切分/embedding -> 向量索引/元数据`
+- `固定评估问题集 -> 检索/回答/工具调用链路 -> 阶段验证报告`
 
 ### 2.3 核心模块交互逻辑
 
@@ -67,6 +73,8 @@ flowchart TD
 - RAG 服务负责文档切分、向量化、召回、重排序和上下文拼接。
 - 工具层负责与订单、物流、工单、投诉等业务系统交互。
 - 数据层负责持久化会话、用户反馈、检索日志与系统配置。
+- 离线数据处理层负责批量构建知识库，避免所有解析、切分和向量化都挤在用户请求链路中。
+- 阶段评估层负责用固定测试集验证 RAG、Prompt 和 Agent 工具调用策略，结果沉淀到 [evaluation-report.md](/D:/pythoncode/ServiceMind/docs/evaluation-report.md)。
 
 ## 3. 文件级与函数级实现视图
 
@@ -205,7 +213,8 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["backend/app/api/v1/endpoints/kb.py\nupload_knowledge_document() / rebuild_knowledge_index()"] --> B["backend/app/services/kb_service.py\nprocess_upload() / rebuild_index()"]
+    S["backend/scripts/build_kb.py\n离线批处理入口"] --> B["backend/app/services/kb_service.py\nprocess_upload() / rebuild_index()"]
+    A["backend/app/api/v1/endpoints/kb.py\nupload_knowledge_document() / rebuild_knowledge_index()"] --> B
     B --> C["backend/app/rag/ingestion.py\nload_documents()"]
     C --> D["backend/app/rag/ingestion.py\nsplit_documents()"]
     D --> E["backend/app/rag/embeddings.py\nembed_documents()"]
@@ -213,7 +222,24 @@ flowchart TD
     B --> G["backend/app/repositories/kb_repository.py\nsave_document_metadata()"]
 ```
 
-### 3.7 工具调用功能文件级流程图
+### 3.7 阶段评估功能文件级流程图
+
+阶段评估不服务于单个用户请求，而服务于项目持续迭代。每次调整检索策略、Prompt 或 Agent 路由后，都应使用固定测试集复跑。
+
+```mermaid
+flowchart TD
+    A["data/eval/retrieval_questions.json\n固定检索问题集"] --> B["backend/scripts/evaluate_retrieval.py"]
+    B --> C["backend/app/rag/retriever.py\nretrieve_documents()"]
+    C --> D["计算 Hit@1 / Recall@K / MRR"]
+    D --> E["docs/evaluation-report.md\n记录召回结果"]
+
+    F["data/eval/tool_cases.json\n工具调用测试集"] --> G["backend/scripts/evaluate_tools.py"]
+    G --> H["backend/app/agents/router.py / tool_service.py"]
+    H --> I["统计工具选择正确率"]
+    I --> E
+```
+
+### 3.8 工具调用功能文件级流程图
 
 当用户问的是订单或物流类问题时，推荐走下面这条文件链路。
 
@@ -243,7 +269,7 @@ flowchart TD
 
 #### 技术实现思路
 
-- 前端使用 React 构建聊天工作台，支持消息列表、快捷入口、流式输出。
+- 前端使用 `Vue 3 + TypeScript + Vue Router + Pinia + Axios` 构建聊天工作台，当前支持消息列表、快捷入口、健康检查、会话与 trace 展示；流式输出作为后续增强。
 - 后端使用 FastAPI 提供 `/chat`、`/session/history` 等接口。
 - 会话上下文采用 `Redis + MySQL` 双层存储：
   - Redis 保留短期上下文，降低读取延迟
@@ -283,18 +309,22 @@ flowchart TD
 
 - 文档导入：支持 PDF、Word、Markdown、TXT、HTML
 - 文档预处理：清洗、去重、分段、元数据打标
+- 当前 MVP 已落地 TXT/Markdown/接口文本的清洗、长度分块、FAISS 本地向量索引、词法回退和来源返回
 - 建索引：
-  - 向量检索用于语义召回
-  - BM25 用于关键词精准匹配
+  - 当前使用 `data/vector_store/servicemind.faiss` 保存 FAISS 索引
+  - 当前使用 `data/vector_store/metadata.json` 保存向量与知识片段元数据映射
+  - 词法检索用于 FAISS 不可用、索引未命中或索引与数据库不同步时兜底
+  - 后续可补 BM25 用于关键词精准匹配
 - 在线检索：
-  - query rewrite
-  - 混合召回
-  - rerank 重排序
+  - 优先走 FAISS 向量召回
+  - 向量召回失败或无有效命中时回退词法检索
+  - 后续补 query rewrite、混合召回和 rerank 重排序
   - 上下文压缩后送入 LLM
 
 #### 关键逻辑
 
 - 保证知识片段带来源标识，便于可追溯
+- 聊天响应通过 `knowledge_sources` 返回命中的 `document_id`、标题、来源类型、来源路径、分数和片段
 - 控制召回片段数量，兼顾效果与成本
 - 对低置信度结果增加兜底策略，例如转人工或提示未命中知识
 

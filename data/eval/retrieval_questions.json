@@ -1,0 +1,209 @@
+[
+  {
+    "id": "refund_001",
+    "question": "七天无理由退款需要满足什么条件？",
+    "gold_title": "退款规则",
+    "expected_keywords": ["七天无理由", "商品需要保持完好", "二次销售"],
+    "category": "refund"
+  },
+  {
+    "id": "refund_002",
+    "question": "退款审核通过后多久到账？",
+    "gold_title": "退款规则",
+    "expected_keywords": ["审核通过", "1 到 3 个工作日", "原路退回"],
+    "category": "refund"
+  },
+  {
+    "id": "refund_003",
+    "question": "商品拆封后还能不能直接退款？",
+    "gold_title": "退款规则",
+    "expected_keywords": ["已经拆封", "售后审核", "质量问题"],
+    "category": "refund"
+  },
+  {
+    "id": "invoice_001",
+    "question": "企业增值税专票需要填写哪些信息？",
+    "gold_title": "发票规则",
+    "expected_keywords": ["发票抬头", "税号", "开户行"],
+    "category": "invoice"
+  },
+  {
+    "id": "invoice_002",
+    "question": "发票一般多久能开好？",
+    "gold_title": "发票规则",
+    "expected_keywords": ["1 到 3 个工作日", "开具"],
+    "category": "invoice"
+  },
+  {
+    "id": "invoice_003",
+    "question": "发票抬头写错了怎么办？",
+    "gold_title": "发票规则",
+    "expected_keywords": ["抬头", "税号", "作废重开"],
+    "category": "invoice"
+  },
+  {
+    "id": "logistics_001",
+    "question": "普通地区付款后多久发货？",
+    "gold_title": "物流规则",
+    "expected_keywords": ["48 小时内发货", "普通地区"],
+    "category": "logistics"
+  },
+  {
+    "id": "logistics_002",
+    "question": "物流超过 72 小时没有更新怎么办？",
+    "gold_title": "物流规则",
+    "expected_keywords": ["72 小时", "没有更新", "人工客服"],
+    "category": "logistics"
+  },
+  {
+    "id": "logistics_003",
+    "question": "我可以用运单号查到哪些物流信息？",
+    "gold_title": "物流规则",
+    "expected_keywords": ["运单号", "承运商", "预计送达时间"],
+    "category": "logistics"
+  },
+  {
+    "id": "member_001",
+    "question": "金卡会员有哪些权益？",
+    "gold_title": "会员权益",
+    "expected_keywords": ["优先退款审核", "专属客服", "生日优惠券"],
+    "category": "member"
+  },
+  {
+    "id": "member_002",
+    "question": "会员等级是怎么计算的？",
+    "gold_title": "会员权益",
+    "expected_keywords": ["近 12 个月", "消费金额", "订单数量"],
+    "category": "member"
+  },
+  {
+    "id": "member_003",
+    "question": "会员权益可以转让或者折现吗？",
+    "gold_title": "会员权益",
+    "expected_keywords": ["不可转让", "不支持折现"],
+    "category": "member"
+  },
+  {
+    "id": "activity_001",
+    "question": "商品活动价格以哪里为准？",
+    "gold_title": "商品活动规则",
+    "expected_keywords": ["订单提交页", "活动价格"],
+    "category": "activity"
+  },
+  {
+    "id": "activity_002",
+    "question": "满减和优惠券能不能无限叠加？",
+    "gold_title": "商品活动规则",
+    "expected_keywords": ["不能无限叠加", "一种主要优惠"],
+    "category": "activity"
+  },
+  {
+    "id": "activity_003",
+    "question": "秒杀订单超时未支付会怎样？",
+    "gold_title": "商品活动规则",
+    "expected_keywords": ["限定时间", "超时", "自动关闭"],
+    "category": "activity"
+  },
+  {
+    "id": "repair_001",
+    "question": "申请维修需要提供什么材料？",
+    "gold_title": "售后维修规则",
+    "expected_keywords": ["订单号", "故障描述", "图片或视频凭证"],
+    "category": "repair"
+  },
+  {
+    "id": "repair_002",
+    "question": "人为损坏还可以免费维修吗？",
+    "gold_title": "售后维修规则",
+    "expected_keywords": ["人为损坏", "承担维修费用"],
+    "category": "repair"
+  },
+  {
+    "id": "repair_003",
+    "question": "维修进度怎么查询？",
+    "gold_title": "售后维修规则",
+    "expected_keywords": ["售后单号", "维修进度"],
+    "category": "repair"
+  },
+  {
+    "id": "complaint_001",
+    "question": "哪些问题可以提交投诉？",
+    "gold_title": "投诉处理规则",
+    "expected_keywords": ["商品质量", "物流延误", "退款争议"],
+    "category": "complaint"
+  },
+  {
+    "id": "complaint_002",
+    "question": "投诉提交后多久处理？",
+    "gold_title": "投诉处理规则",
+    "expected_keywords": ["投诉工单", "1 到 3 个工作日"],
+    "category": "complaint"
+  },
+  {
+    "id": "complaint_003",
+    "question": "金额争议投诉要提供什么凭证？",
+    "gold_title": "投诉处理规则",
+    "expected_keywords": ["订单截图", "沟通记录", "物流凭证"],
+    "category": "complaint"
+  },
+  {
+    "id": "payment_001",
+    "question": "平台支持哪些支付方式？",
+    "gold_title": "支付规则",
+    "expected_keywords": ["银行卡", "支付宝", "微信支付", "余额支付"],
+    "category": "payment"
+  },
+  {
+    "id": "payment_002",
+    "question": "支付成功但订单状态没更新怎么办？",
+    "gold_title": "支付规则",
+    "expected_keywords": ["刷新订单详情页", "支付流水"],
+    "category": "payment"
+  },
+  {
+    "id": "coupon_001",
+    "question": "优惠券有哪些类型？",
+    "gold_title": "优惠券规则",
+    "expected_keywords": ["满减券", "折扣券", "运费券"],
+    "category": "coupon"
+  },
+  {
+    "id": "coupon_002",
+    "question": "订单取消后优惠券会退回吗？",
+    "gold_title": "优惠券规则",
+    "expected_keywords": ["订单取消", "未过期", "退回账户"],
+    "category": "coupon"
+  },
+  {
+    "id": "privacy_001",
+    "question": "修改绑定手机号需要验证什么？",
+    "gold_title": "隐私与账号规则",
+    "expected_keywords": ["短信验证码", "验证身份"],
+    "category": "privacy"
+  },
+  {
+    "id": "privacy_002",
+    "question": "账号异常登录时平台会怎么处理？",
+    "gold_title": "隐私与账号规则",
+    "expected_keywords": ["异常登录", "限制登录", "支付"],
+    "category": "privacy"
+  },
+  {
+    "id": "negative_001",
+    "question": "门店自提需要带身份证吗？",
+    "expect_no_hit": true,
+    "category": "negative"
+  },
+  {
+    "id": "negative_002",
+    "question": "礼品卡余额能提现吗？",
+    "expect_no_hit": true,
+    "category": "negative"
+  },
+  {
+    "id": "negative_003",
+    "question": "海外购商品清关需要多久？",
+    "expect_no_hit": true,
+    "category": "negative"
+  }
+]

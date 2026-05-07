@@ -1,3 +1,5 @@
 """Shared API dependency definitions."""
 
-# TODO: add auth dependency, request context, pagination, and common validators.
+from app.db.session import get_db
+
+__all__ = ["get_db"]

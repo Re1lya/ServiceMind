@@ -1,0 +1,16 @@
+.idea/
+__pycache__/
+*.py[cod]
+
+backend/.env
+backend/.venv/
+backend/.tmp/
+backend/.pytest_cache/
+backend/pytest-cache-files-*/
+frontend/node_modules/
+frontend/dist/
+
+data/vector_store/*.faiss
+data/vector_store/metadata.json
+data/raw/.gitkeep
+data/vector_store/.gitkeep

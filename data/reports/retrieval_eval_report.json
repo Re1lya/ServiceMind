@@ -1,0 +1,121 @@
+{
+  "total_cases": 5,
+  "positive_cases": 3,
+  "negative_cases": 2,
+  "top_k": 5,
+  "hit_at_1": 1.0,
+  "recall_at_k": 1.0,
+  "mrr": 1.0,
+  "no_hit_accuracy": 0.5,
+  "keyword_coverage": 0.611111111111111,
+  "average_latency_ms": 145.9932,
+  "results": [
+    {
+      "id": "faq_refund_001",
+      "question": "退款规则是什么？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 0.6666666666666666,
+      "latency_ms": 187.341,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_8c057b016dfe4ed084bd88392fdd43b4",
+          "title": "退款规则",
+          "score": 0.16495724022388458,
+          "snippet": "平台支持七天无理由退款，商品需要保持完好。"
+        }
+      ]
+    },
+    {
+      "id": "faq_refund_002",
+      "question": "七天无理由退款需要满足什么条件？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 0.6666666666666666,
+      "latency_ms": 130.31,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_8c057b016dfe4ed084bd88392fdd43b4",
+          "title": "退款规则",
+          "score": 0.5070925951004028,
+          "snippet": "平台支持七天无理由退款，商品需要保持完好。"
+        }
+      ]
+    },
+    {
+      "id": "faq_refund_003",
+      "question": "商品保持完好还能不能退？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 0.5,
+      "latency_ms": 130.656,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_8c057b016dfe4ed084bd88392fdd43b4",
+          "title": "退款规则",
+          "score": 0.4841820299625397,
+          "snippet": "平台支持七天无理由退款，商品需要保持完好。"
+        }
+      ]
+    },
+    {
+      "id": "faq_invoice_negative_001",
+      "question": "发票规则是什么？",
+      "category": "invoice",
+      "gold_doc_id": null,
+      "gold_title": null,
+      "expect_no_hit": true,
+      "hit_rank": null,
+      "hit_at_1": false,
+      "recall_at_k": false,
+      "no_hit_correct": false,
+      "keyword_coverage": 0.0,
+      "latency_ms": 151.805,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_8c057b016dfe4ed084bd88392fdd43b4",
+          "title": "退款规则",
+          "score": 6.0,
+          "snippet": "平台支持七天无理由退款，商品需要保持完好。"
+        }
+      ]
+    },
+    {
+      "id": "faq_logistics_negative_001",
+      "question": "偏远地区物流多久能送到？",
+      "category": "logistics",
+      "gold_doc_id": null,
+      "gold_title": null,
+      "expect_no_hit": true,
+      "hit_rank": null,
+      "hit_at_1": false,
+      "recall_at_k": false,
+      "no_hit_correct": true,
+      "keyword_coverage": 0.0,
+      "latency_ms": 129.854,
+      "hits": []
+    }
+  ]
+}

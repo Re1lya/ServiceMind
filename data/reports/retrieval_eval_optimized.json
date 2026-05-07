@@ -1,0 +1,722 @@
+{
+  "total_cases": 30,
+  "positive_cases": 27,
+  "negative_cases": 3,
+  "top_k": 5,
+  "hit_at_1": 1.0,
+  "recall_at_k": 1.0,
+  "mrr": 1.0,
+  "no_hit_accuracy": 1.0,
+  "keyword_coverage": 0.9814814814814815,
+  "average_latency_ms": 153.19103333333334,
+  "results": [
+    {
+      "id": "refund_001",
+      "question": "七天无理由退款需要满足什么条件？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 519.141,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_f25a0590c1bb414a898d2bc432bb4853",
+          "title": "退款规则",
+          "score": 21.343298282757466,
+          "snippet": "# 退款规则\n平台支持七天无理由退款。用户需要在签收后七天内发起申请，商品需要保持完好，不影响二次销售。\n已经拆封、已经使用、影响二次销售的商品，需要按照售后审核结果处理。质量问题可以上传照片或视频作为凭证。\n退款到账时间通常为审核通过后 1 到 3 个工作日，原路退回到用户支付账户。"
+        }
+      ]
+    },
+    {
+      "id": "refund_002",
+      "question": "退款审核通过后多久到账？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 149.495,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_f25a0590c1bb414a898d2bc432bb4853",
+          "title": "退款规则",
+          "score": 20.086527867055313,
+          "snippet": "销售。\n已经拆封、已经使用、影响二次销售的商品，需要按照售后审核结果处理。质量问题可以上传照片或视频作为凭证。\n退款到账时间通常为审核通过后 1 到 3 个工作日，原路退回到用户支付账户。"
+        }
+      ]
+    },
+    {
+      "id": "refund_003",
+      "question": "商品拆封后还能不能直接退款？",
+      "category": "refund",
+      "gold_doc_id": null,
+      "gold_title": "退款规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 156.402,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_f25a0590c1bb414a898d2bc432bb4853",
+          "title": "退款规则",
+          "score": 16.015287040065473,
+          "snippet": "收后七天内发起申请，商品需要保持完好，不影响二次销售。\n已经拆封、已经使用、影响二次销售的商品，需要按照售后审核结果处理。质量问题可以上传照片或视频作为凭证。\n退款到账时间通常为审核通过后 1 到 3 个工作日，原路退回到用户支付账户。"
+        }
+      ]
+    },
+    {
+      "id": "invoice_001",
+      "question": "企业增值税专票需要填写哪些信息？",
+      "category": "invoice",
+      "gold_doc_id": null,
+      "gold_title": "发票规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 156.871,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_5723ae12ce9347fc9c6e36b5ccb2aaf2",
+          "title": "发票规则",
+          "score": 21.29146336771774,
+          "snippet": "# 发票规则\n平台支持普通电子发票和企业增值税专票。企业用户申请专票时，需要填写发票抬头、税号、注册地址、开户行和银行账号。\n订单完成后可以在订单详情页申请发票。发票信息提交后一般 1 到 3 个工作日开具。\n如果发票抬头或税号填写错误，用户需要联系人工客服申请作废重开。"
+        }
+      ]
+    },
+    {
+      "id": "invoice_002",
+      "question": "发票一般多久能开好？",
+      "category": "invoice",
+      "gold_doc_id": null,
+      "gold_title": "发票规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 132.161,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_5723ae12ce9347fc9c6e36b5ccb2aaf2",
+          "title": "发票规则",
+          "score": 13.712513260620113,
+          "snippet": "# 发票规则\n平台支持普通电子发票和企业增值税专票。企业用户申请专票时，需要填写发票抬头、税号、注册地址、开户行和银行账号。\n订单完成后可以在订单详情页申请发票。发票信息提交后一般 1 到 3 个工作日开具。\n如果发票抬头或税号填写错误，用户需要联系人工客服申请作废重开。"
+        }
+      ]
+    },
+    {
+      "id": "invoice_003",
+      "question": "发票抬头写错了怎么办？",
+      "category": "invoice",
+      "gold_doc_id": null,
+      "gold_title": "发票规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 144.77,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_5723ae12ce9347fc9c6e36b5ccb2aaf2",
+          "title": "发票规则",
+          "score": 24.1391479262371,
+          "snippet": "提交后一般 1 到 3 个工作日开具。\n如果发票抬头或税号填写错误，用户需要联系人工客服申请作废重开。"
+        }
+      ]
+    },
+    {
+      "id": "logistics_001",
+      "question": "普通地区付款后多久发货？",
+      "category": "logistics",
+      "gold_doc_id": null,
+      "gold_title": "物流规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 128.036,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_1593fd02bde04c7f8958b4753071d22a",
+          "title": "物流规则",
+          "score": 20.357488313808602,
+          "snippet": "# 物流规则\n普通地区订单通常在付款后 48 小时内发货。偏远地区、预售商品和大件商品的配送时效可能延长。\n用户可以通过订单号或运单号查询物流轨迹。系统会展示承运商、当前物流节点和预计送达时间。\n如果物流超过 72 小时没有更新，用户可以联系人工客服协助催件。"
+        }
+      ]
+    },
+    {
+      "id": "logistics_002",
+      "question": "物流超过 72 小时没有更新怎么办？",
+      "category": "logistics",
+      "gold_doc_id": null,
+      "gold_title": "物流规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 153.654,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_1593fd02bde04c7f8958b4753071d22a",
+          "title": "物流规则",
+          "score": 37.3392679409077,
+          "snippet": "统会展示承运商、当前物流节点和预计送达时间。\n如果物流超过 72 小时没有更新，用户可以联系人工客服协助催件。"
+        }
+      ]
+    },
+    {
+      "id": "logistics_003",
+      "question": "我可以用运单号查到哪些物流信息？",
+      "category": "logistics",
+      "gold_doc_id": null,
+      "gold_title": "物流规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 129.18,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_1593fd02bde04c7f8958b4753071d22a",
+          "title": "物流规则",
+          "score": 22.151997853425847,
+          "snippet": "商品和大件商品的配送时效可能延长。\n用户可以通过订单号或运单号查询物流轨迹。系统会展示承运商、当前物流节点和预计送达时间。\n如果物流超过 72 小时没有更新，用户可以联系人工客服协助催件。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_4bf545455dcb4338b5cbc5f83924369d",
+          "title": "售后维修规则",
+          "score": 5.124176160685894,
+          "snippet": "期的商品，可能需要用户承担维修费用。\n维修进度可以通过售后单号查询。维修完成后，平台会安排寄回或通知用户取件。"
+        }
+      ]
+    },
+    {
+      "id": "member_001",
+      "question": "金卡会员有哪些权益？",
+      "category": "member",
+      "gold_doc_id": null,
+      "gold_title": "会员权益",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 150.387,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_2bc0388aa74d4eab969dac0636f3b65e",
+          "title": "会员权益",
+          "score": 30.83032190351914,
+          "snippet": "# 会员权益\n会员等级分为普通会员、银卡会员、金卡会员和黑卡会员。会员等级根据近 12 个月消费金额和订单数量综合计算。\n金卡会员支持优先退款审核、专属客服和生日优惠券。黑卡会员额外支持专属活动邀请和部分商品免运费。\n会员权益不可转让，不支持折现。账号异常或存在违规行为时，平台可以暂停会员权益。"
+        }
+      ]
+    },
+    {
+      "id": "member_002",
+      "question": "会员等级是怎么计算的？",
+      "category": "member",
+      "gold_doc_id": null,
+      "gold_title": "会员权益",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 141.051,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_2bc0388aa74d4eab969dac0636f3b65e",
+          "title": "会员权益",
+          "score": 22.58102774725293,
+          "snippet": "# 会员权益\n会员等级分为普通会员、银卡会员、金卡会员和黑卡会员。会员等级根据近 12 个月消费金额和订单数量综合计算。\n金卡会员支持优先退款审核、专属客服和生日优惠券。黑卡会员额外支持专属活动邀请和部分商品免运费。\n会员权益不可转让，不支持折现。账号异常或存在违规行为时，平台可以暂停会员权益。"
+        }
+      ]
+    },
+    {
+      "id": "member_003",
+      "question": "会员权益可以转让或者折现吗？",
+      "category": "member",
+      "gold_doc_id": null,
+      "gold_title": "会员权益",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 154.815,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_2bc0388aa74d4eab969dac0636f3b65e",
+          "title": "会员权益",
+          "score": 43.50124324528871,
+          "snippet": "# 会员权益\n会员等级分为普通会员、银卡会员、金卡会员和黑卡会员。会员等级根据近 12 个月消费金额和订单数量综合计算。\n金卡会员支持优先退款审核、专属客服和生日优惠券。黑卡会员额外支持专属活动邀请和部分商品免运费。\n会员权益不可转让，不支持折现。账号异常或存在违规行为时，平台可以暂停会员权益。"
+        }
+      ]
+    },
+    {
+      "id": "activity_001",
+      "question": "商品活动价格以哪里为准？",
+      "category": "activity",
+      "gold_doc_id": null,
+      "gold_title": "商品活动规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 135.131,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_7f9c4f32b7644f569efc20ccabc9d5fe",
+          "title": "商品活动规则",
+          "score": 20.969318046752036,
+          "snippet": "包括满减、限时折扣、秒杀和组合优惠。活动价格以订单提交页展示为准。\n优惠活动不能无限叠加，同一订单通常只能使用一种主要优惠。部分商品不参与满减或优惠券活动。\n秒杀商品库存有限，提交订单后需要在限定时间内完成支付，超时订单会自动关闭。"
+        }
+      ]
+    },
+    {
+      "id": "activity_002",
+      "question": "满减和优惠券能不能无限叠加？",
+      "category": "activity",
+      "gold_doc_id": null,
+      "gold_title": "商品活动规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 0.5,
+      "latency_ms": 129.257,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_7f9c4f32b7644f569efc20ccabc9d5fe",
+          "title": "商品活动规则",
+          "score": 19.902794072010703,
+          "snippet": "叠加，同一订单通常只能使用一种主要优惠。部分商品不参与满减或优惠券活动。\n秒杀商品库存有限，提交订单后需要在限定时间内完成支付，超时订单会自动关闭。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_c83512092bed467383fc2aa58c357bdd",
+          "title": "优惠券规则",
+          "score": 15.01995587565677,
+          "snippet": "# 优惠券规则\n优惠券分为满减券、折扣券、运费券和会员专属券。不同优惠券有使用门槛、有效期和适用商品范围。\n优惠券过期后不能恢复。订单取消后，未过期且符合规则的优惠券通常会退回账户。\n优惠券不能兑换现金，不能转让给其他账号，部分活动商品不可使用优惠券。"
+        }
+      ]
+    },
+    {
+      "id": "activity_003",
+      "question": "秒杀订单超时未支付会怎样？",
+      "category": "activity",
+      "gold_doc_id": null,
+      "gold_title": "商品活动规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 140.617,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_7f9c4f32b7644f569efc20ccabc9d5fe",
+          "title": "商品活动规则",
+          "score": 14.99442514060528,
+          "snippet": "惠券活动。\n秒杀商品库存有限，提交订单后需要在限定时间内完成支付，超时订单会自动关闭。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_bd00e792408e4869a6fe50a77029461c",
+          "title": "支付规则",
+          "score": 10.215781019120502,
+          "snippet": "# 支付规则\n平台支持银行卡、支付宝、微信支付和余额支付。订单需要在规定时间内完成支付，否则系统会自动关闭订单。\n支付成功但订单状态未更新时，用户可以等待几分钟后刷新订单详情页，或联系人工客服核查支付流水。\n重复扣款通常会由支付渠道自动退回，到账时间以银行或第三方支付机构处理时效为准。"
+        }
+      ]
+    },
+    {
+      "id": "repair_001",
+      "question": "申请维修需要提供什么材料？",
+      "category": "repair",
+      "gold_doc_id": null,
+      "gold_title": "售后维修规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 129.948,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_4bf545455dcb4338b5cbc5f83924369d",
+          "title": "售后维修规则",
+          "score": 18.481516965995187,
+          "snippet": "# 售后维修规则\n部分商品支持质保期内免费维修。用户需要提供订单号、故障描述和必要的图片或视频凭证。\n人为损坏、进水、私自拆修或超过质保期的商品，可能需要用户承担维修费用。\n维修进度可以通过售后单号查询。维修完成后，平台会安排寄回或通知用户取件。"
+        }
+      ]
+    },
+    {
+      "id": "repair_002",
+      "question": "人为损坏还可以免费维修吗？",
+      "category": "repair",
+      "gold_doc_id": null,
+      "gold_title": "售后维修规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 149.156,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_4bf545455dcb4338b5cbc5f83924369d",
+          "title": "售后维修规则",
+          "score": 29.481930719822877,
+          "snippet": "维修。用户需要提供订单号、故障描述和必要的图片或视频凭证。\n人为损坏、进水、私自拆修或超过质保期的商品，可能需要用户承担维修费用。\n维修进度可以通过售后单号查询。维修完成后，平台会安排寄回或通知用户取件。"
+        }
+      ]
+    },
+    {
+      "id": "repair_003",
+      "question": "维修进度怎么查询？",
+      "category": "repair",
+      "gold_doc_id": null,
+      "gold_title": "售后维修规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 141.708,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_4bf545455dcb4338b5cbc5f83924369d",
+          "title": "售后维修规则",
+          "score": 23.721072442247742,
+          "snippet": "的商品，可能需要用户承担维修费用。\n维修进度可以通过售后单号查询。维修完成后，平台会安排寄回或通知用户取件。"
+        }
+      ]
+    },
+    {
+      "id": "complaint_001",
+      "question": "哪些问题可以提交投诉？",
+      "category": "complaint",
+      "gold_doc_id": null,
+      "gold_title": "投诉处理规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 153.898,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_b52225d6d04f44fd93c40158430aa427",
+          "title": "投诉处理规则",
+          "score": 18.339821867782753,
+          "snippet": "# 投诉处理规则\n用户可以针对商品质量、物流延误、服务态度、退款争议等问题提交投诉。\n投诉提交后，平台会生成投诉工单，并在 1 到 3 个工作日内给出处理结果。\n如果投诉涉及金额争议，用户需要提供订单截图、沟通记录或物流凭证。复杂投诉可以升级人工客服处理。"
+        }
+      ]
+    },
+    {
+      "id": "complaint_002",
+      "question": "投诉提交后多久处理？",
+      "category": "complaint",
+      "gold_doc_id": null,
+      "gold_title": "投诉处理规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 143.666,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_b52225d6d04f44fd93c40158430aa427",
+          "title": "投诉处理规则",
+          "score": 18.367367319900673,
+          "snippet": "# 投诉处理规则\n用户可以针对商品质量、物流延误、服务态度、退款争议等问题提交投诉。\n投诉提交后，平台会生成投诉工单，并在 1 到 3 个工作日内给出处理结果。\n如果投诉涉及金额争议，用户需要提供订单截图、沟通记录或物流凭证。复杂投诉可以升级人工客服处理。"
+        }
+      ]
+    },
+    {
+      "id": "complaint_003",
+      "question": "金额争议投诉要提供什么凭证？",
+      "category": "complaint",
+      "gold_doc_id": null,
+      "gold_title": "投诉处理规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 130.239,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_b52225d6d04f44fd93c40158430aa427",
+          "title": "投诉处理规则",
+          "score": 33.08053030885116,
+          "snippet": "投诉处理规则\n用户可以针对商品质量、物流延误、服务态度、退款争议等问题提交投诉。\n投诉提交后，平台会生成投诉工单，并在 1 到 3 个工作日内给出处理结果。\n如果投诉涉及金额争议，用户需要提供订单截图、沟通记录或物流凭证。复杂投诉可以升级人工客服处理。"
+        }
+      ]
+    },
+    {
+      "id": "payment_001",
+      "question": "平台支持哪些支付方式？",
+      "category": "payment",
+      "gold_doc_id": null,
+      "gold_title": "支付规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 128.494,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_bd00e792408e4869a6fe50a77029461c",
+          "title": "支付规则",
+          "score": 10.1689516762784,
+          "snippet": "# 支付规则\n平台支持银行卡、支付宝、微信支付和余额支付。订单需要在规定时间内完成支付，否则系统会自动关闭订单。\n支付成功但订单状态未更新时，用户可以等待几分钟后刷新订单详情页，或联系人工客服核查支付流水。\n重复扣款通常会由支付渠道自动退回，到账时间以银行或第三方支付机构处理时效为准。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_102e71e284544687ae2431d047177b8a",
+          "title": "隐私与账号规则",
+          "score": 9.799093092125247,
+          "snippet": "，需要通过短信验证码验证身份。\n平台会对订单信息、联系方式和支付信息进行保护，不会向无关第三方泄露用户隐私。\n如果账号存在异常登录、盗用风险或违规行为，平台可能临时限制登录、支付或优惠券使用。"
+        }
+      ]
+    },
+    {
+      "id": "payment_002",
+      "question": "支付成功但订单状态没更新怎么办？",
+      "category": "payment",
+      "gold_doc_id": null,
+      "gold_title": "支付规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 144.461,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_bd00e792408e4869a6fe50a77029461c",
+          "title": "支付规则",
+          "score": 25.447506307036086,
+          "snippet": "订单需要在规定时间内完成支付，否则系统会自动关闭订单。\n支付成功但订单状态未更新时，用户可以等待几分钟后刷新订单详情页，或联系人工客服核查支付流水。\n重复扣款通常会由支付渠道自动退回，到账时间以银行或第三方支付机构处理时效为准。"
+        }
+      ]
+    },
+    {
+      "id": "coupon_001",
+      "question": "优惠券有哪些类型？",
+      "category": "coupon",
+      "gold_doc_id": null,
+      "gold_title": "优惠券规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 141.413,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_c83512092bed467383fc2aa58c357bdd",
+          "title": "优惠券规则",
+          "score": 10.17128436365633,
+          "snippet": "# 优惠券规则\n优惠券分为满减券、折扣券、运费券和会员专属券。不同优惠券有使用门槛、有效期和适用商品范围。\n优惠券过期后不能恢复。订单取消后，未过期且符合规则的优惠券通常会退回账户。\n优惠券不能兑换现金，不能转让给其他账号，部分活动商品不可使用优惠券。"
+        }
+      ]
+    },
+    {
+      "id": "coupon_002",
+      "question": "订单取消后优惠券会退回吗？",
+      "category": "coupon",
+      "gold_doc_id": null,
+      "gold_title": "优惠券规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 154.683,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_c83512092bed467383fc2aa58c357bdd",
+          "title": "优惠券规则",
+          "score": 19.94357155183456,
+          "snippet": "# 优惠券规则\n优惠券分为满减券、折扣券、运费券和会员专属券。不同优惠券有使用门槛、有效期和适用商品范围。\n优惠券过期后不能恢复。订单取消后，未过期且符合规则的优惠券通常会退回账户。\n优惠券不能兑换现金，不能转让给其他账号，部分活动商品不可使用优惠券。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_7f9c4f32b7644f569efc20ccabc9d5fe",
+          "title": "商品活动规则",
+          "score": 4.67212646851666,
+          "snippet": "叠加，同一订单通常只能使用一种主要优惠。部分商品不参与满减或优惠券活动。\n秒杀商品库存有限，提交订单后需要在限定时间内完成支付，超时订单会自动关闭。"
+        }
+      ]
+    },
+    {
+      "id": "privacy_001",
+      "question": "修改绑定手机号需要验证什么？",
+      "category": "privacy",
+      "gold_doc_id": null,
+      "gold_title": "隐私与账号规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 130.911,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_102e71e284544687ae2431d047177b8a",
+          "title": "隐私与账号规则",
+          "score": 21.241455428379055,
+          "snippet": "# 隐私与账号规则\n用户可以在账号设置中修改手机号、收货地址和隐私授权。修改绑定手机号时，需要通过短信验证码验证身份。\n平台会对订单信息、联系方式和支付信息进行保护，不会向无关第三方泄露用户隐私。\n如果账号存在异常登录、盗用风险或违规行为，平台可能临时限制登录、支付或优惠券使用。"
+        }
+      ]
+    },
+    {
+      "id": "privacy_002",
+      "question": "账号异常登录时平台会怎么处理？",
+      "category": "privacy",
+      "gold_doc_id": null,
+      "gold_title": "隐私与账号规则",
+      "expect_no_hit": false,
+      "hit_rank": 1,
+      "hit_at_1": true,
+      "recall_at_k": true,
+      "no_hit_correct": null,
+      "keyword_coverage": 1.0,
+      "latency_ms": 132.109,
+      "hits": [
+        {
+          "rank": 1,
+          "document_id": "doc_102e71e284544687ae2431d047177b8a",
+          "title": "隐私与账号规则",
+          "score": 20.13800352844207,
+          "snippet": "付信息进行保护，不会向无关第三方泄露用户隐私。\n如果账号存在异常登录、盗用风险或违规行为，平台可能临时限制登录、支付或优惠券使用。"
+        },
+        {
+          "rank": 2,
+          "document_id": "doc_2bc0388aa74d4eab969dac0636f3b65e",
+          "title": "会员权益",
+          "score": 9.31042380401487,
+          "snippet": "动邀请和部分商品免运费。\n会员权益不可转让，不支持折现。账号异常或存在违规行为时，平台可以暂停会员权益。"
+        }
+      ]
+    },
+    {
+      "id": "negative_001",
+      "question": "门店自提需要带身份证吗？",
+      "category": "negative",
+      "gold_doc_id": null,
+      "gold_title": null,
+      "expect_no_hit": true,
+      "hit_rank": null,
+      "hit_at_1": false,
+      "recall_at_k": false,
+      "no_hit_correct": true,
+      "keyword_coverage": 0.0,
+      "latency_ms": 130.487,
+      "hits": []
+    },
+    {
+      "id": "negative_002",
+      "question": "礼品卡余额能提现吗？",
+      "category": "negative",
+      "gold_doc_id": null,
+      "gold_title": null,
+      "expect_no_hit": true,
+      "hit_rank": null,
+      "hit_at_1": false,
+      "recall_at_k": false,
+      "no_hit_correct": true,
+      "keyword_coverage": 0.0,
+      "latency_ms": 130.994,
+      "hits": []
+    },
+    {
+      "id": "negative_003",
+      "question": "海外购商品清关需要多久？",
+      "category": "negative",
+      "gold_doc_id": null,
+      "gold_title": null,
+      "expect_no_hit": true,
+      "hit_rank": null,
+      "hit_at_1": false,
+      "recall_at_k": false,
+      "no_hit_correct": true,
+      "keyword_coverage": 0.0,
+      "latency_ms": 132.596,
+      "hits": []
+    }
+  ]
+}

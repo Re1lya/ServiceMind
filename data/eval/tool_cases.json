@@ -1,0 +1,128 @@
+[
+  {
+    "id": "tool_order_001",
+    "message": "帮我查一下订单 ORD2026043001 的状态",
+    "user_id": "u_order_001",
+    "expected_route": "order_query",
+    "expected_tool": "order_query",
+    "expected_status": "success",
+    "expected_answer_source": "tool",
+    "expected_slots": {
+      "order_no": "ORD2026043001"
+    },
+    "expected_reply_contains": ["ORD2026043001", "当前状态", "paid"]
+  },
+  {
+    "id": "tool_order_002",
+    "message": "查一下我的订单状态",
+    "user_id": "u_order_002",
+    "expected_route": "order_query",
+    "expected_tool": "order_query",
+    "expected_status": "success",
+    "expected_answer_source": "tool",
+    "expected_slots": {
+      "order_no": "ORD2026043002"
+    },
+    "expected_reply_contains": ["ORD2026043002", "shipped"]
+  },
+  {
+    "id": "tool_order_003",
+    "message": "帮我查一下订单状态",
+    "user_id": "u_multi_001",
+    "expected_route": "order_query",
+    "expected_tool": "order_query",
+    "expected_status": "needs_input",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["补充订单号"]
+  },
+  {
+    "id": "tool_order_004",
+    "message": "帮我查一下订单 ORD9999999999",
+    "user_id": "u_order_001",
+    "expected_route": "order_query",
+    "expected_tool": "order_query",
+    "expected_status": "not_found",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["未查到匹配的订单"]
+  },
+  {
+    "id": "tool_order_005",
+    "message": "查订单",
+    "expected_route": "order_query",
+    "expected_tool": "order_query",
+    "expected_status": "needs_input",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["提供订单号"]
+  },
+  {
+    "id": "tool_logistics_001",
+    "message": "帮我查一下物流 SF2026043001 到哪了",
+    "user_id": "u_order_001",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "success",
+    "expected_answer_source": "tool",
+    "expected_slots": {
+      "order_no": "ORD2026043001",
+      "tracking_no": "SF2026043001"
+    },
+    "expected_reply_contains": ["SF Express", "上海转运中心"]
+  },
+  {
+    "id": "tool_logistics_002",
+    "message": "查询订单 ORD2026043002 的物流",
+    "user_id": "u_order_002",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "success",
+    "expected_answer_source": "tool",
+    "expected_slots": {
+      "order_no": "ORD2026043002",
+      "tracking_no": "JD2026043002"
+    },
+    "expected_reply_contains": ["JD Logistics", "快递员派送中"]
+  },
+  {
+    "id": "tool_logistics_003",
+    "message": "帮我查一下物流状态",
+    "user_id": "u_multi_001",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "needs_input",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["补充订单号或运单号"]
+  },
+  {
+    "id": "tool_logistics_004",
+    "message": "帮我查物流 TRACK999999",
+    "user_id": "u_order_001",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "not_found",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["未查到匹配的物流信息"]
+  },
+  {
+    "id": "tool_logistics_005",
+    "message": "查物流",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "needs_input",
+    "expected_answer_source": "tool",
+    "expected_reply_contains": ["提供订单号", "运单号"]
+  },
+  {
+    "id": "tool_route_priority_001",
+    "message": "帮我查一下订单 ORD2026043001 的物流进度",
+    "user_id": "u_order_001",
+    "expected_route": "logistics_query",
+    "expected_tool": "logistics_query",
+    "expected_status": "success",
+    "expected_answer_source": "tool",
+    "expected_slots": {
+      "order_no": "ORD2026043001",
+      "tracking_no": "SF2026043001"
+    },
+    "expected_reply_contains": ["物流信息", "SF Express"]
+  }
+]

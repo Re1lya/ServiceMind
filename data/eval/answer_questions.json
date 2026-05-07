@@ -1,0 +1,96 @@
+[
+  {
+    "id": "answer_refund_001",
+    "question": "商品已经拆封还能直接退款吗？",
+    "expected_source_title": "退款规则",
+    "expected_keywords": ["已经拆封", "售后审核", "质量问题"],
+    "must_not_include": ["一定可以退", "无需审核"],
+    "category": "refund"
+  },
+  {
+    "id": "answer_invoice_001",
+    "question": "发票抬头写错了怎么办？",
+    "expected_source_title": "发票规则",
+    "expected_keywords": ["发票抬头", "税号", "作废重开"],
+    "must_not_include": ["自动修改", "无需联系客服"],
+    "category": "invoice"
+  },
+  {
+    "id": "answer_logistics_001",
+    "question": "物流超过 72 小时没有更新怎么办？",
+    "expected_source_title": "物流规则",
+    "expected_keywords": ["72 小时", "没有更新", "人工客服", "催件"],
+    "must_not_include": ["一定当天送达", "无需处理"],
+    "category": "logistics"
+  },
+  {
+    "id": "answer_member_001",
+    "question": "金卡会员有哪些权益？",
+    "expected_source_title": "会员权益",
+    "expected_keywords": ["优先退款审核", "专属客服", "生日优惠券"],
+    "must_not_include": ["免单", "免费提现"],
+    "category": "member"
+  },
+  {
+    "id": "answer_activity_001",
+    "question": "秒杀订单超时未支付会怎样？",
+    "expected_source_title": "商品活动规则",
+    "expected_keywords": ["限定时间", "超时", "自动关闭"],
+    "must_not_include": ["永久保留库存", "不会取消"],
+    "category": "activity"
+  },
+  {
+    "id": "answer_repair_001",
+    "question": "人为损坏可以免费维修吗？",
+    "expected_source_title": "售后维修规则",
+    "expected_keywords": ["人为损坏", "承担维修费用"],
+    "must_not_include": ["一定免费", "无需承担费用"],
+    "category": "repair"
+  },
+  {
+    "id": "answer_complaint_001",
+    "question": "金额争议投诉需要提供什么凭证？",
+    "expected_source_title": "投诉处理规则",
+    "expected_keywords": ["订单截图", "沟通记录", "物流凭证"],
+    "must_not_include": ["不需要凭证", "口头说明即可"],
+    "category": "complaint"
+  },
+  {
+    "id": "answer_payment_001",
+    "question": "重复扣款一般多久到账？",
+    "expected_source_title": "支付规则",
+    "expected_keywords": ["重复扣款", "自动退回", "银行", "第三方支付机构"],
+    "must_not_include": ["立即到账", "平台直接提现"],
+    "category": "payment"
+  },
+  {
+    "id": "answer_coupon_001",
+    "question": "优惠券过期后可以恢复吗？",
+    "expected_source_title": "优惠券规则",
+    "expected_keywords": ["优惠券过期后不能恢复"],
+    "must_not_include": ["可以恢复", "联系客服必定恢复"],
+    "category": "coupon"
+  },
+  {
+    "id": "answer_privacy_001",
+    "question": "修改绑定手机号需要验证什么？",
+    "expected_source_title": "隐私与账号规则",
+    "expected_keywords": ["短信验证码", "验证身份"],
+    "must_not_include": ["无需验证", "任何人都可以修改"],
+    "category": "privacy"
+  },
+  {
+    "id": "answer_negative_001",
+    "question": "门店自提需要带身份证吗？",
+    "expect_no_hit": true,
+    "must_not_include": ["需要带身份证", "必须带身份证"],
+    "category": "negative"
+  },
+  {
+    "id": "answer_negative_002",
+    "question": "礼品卡余额能提现吗？",
+    "expect_no_hit": true,
+    "must_not_include": ["能提现", "可以提现"],
+    "category": "negative"
+  }
+]

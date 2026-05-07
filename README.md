@@ -16,12 +16,13 @@ ServiceMind 是一个面向电商、零售与本地生活场景的智能客服 A
 
 ### 2.1 前端
 
-- 前端框架：`React 18 + TypeScript`
+- 前端框架：`Vue 3 + TypeScript`
 - 构建工具：`Vite`
-- UI 组件库：`Ant Design` 或 `Arco Design`
-- 状态管理：`Zustand`
+- 路由管理：`Vue Router`
+- 状态管理：`Pinia`
 - 网络请求：`Axios`
-- 实时输出：`SSE / WebSocket`
+- 图标组件：`lucide-vue-next`
+- 实时输出：当前为普通 HTTP 联调，后续演进为 `SSE / WebSocket`
 
 ### 2.2 后端
 
@@ -37,15 +38,15 @@ ServiceMind 是一个面向电商、零售与本地生活场景的智能客服 A
 
 - 关系型数据库：`MySQL 8.0`
 - 缓存与会话态：`Redis`
-- 向量检索：`FAISS` 或 `ChromaDB`
-- 关键词检索：`BM25`
+- 向量检索：当前使用本地 `FAISS` 索引，后续可按规模评估 `ChromaDB`
+- 关键词检索：当前保留轻量词法检索作为 FAISS 失败回退，后续演进为 `BM25`
 - 对象存储：本地文件系统或 `MinIO`
 - 日志监控：`Loguru + Prometheus + Grafana`
 
 ### 2.4 AI 与工具层
 
-- RAG 检索：`Embedding + 向量召回 + BM25 混合检索 + 重排序`
-- Embedding 模型：`bge-small-zh / bge-base-zh`
+- RAG 检索：当前为 `文本分块 + Embedding + FAISS 向量召回 + 词法回退 + 来源返回`
+- Embedding 模型：优先使用 OpenAI-compatible `/embeddings`，未配置时使用本地哈希 embedding 兜底；后续可切换 `bge-small-zh / bge-base-zh`
 - Agent 模式：`ReAct / Tool Calling`
 - 工具协议：`MCP（Model Context Protocol）`
 - 客服业务工具：
@@ -108,6 +109,17 @@ ServiceMind/
 │  ├─ tests/
 │  ├─ .env.example
 │  └─ requirements.txt
+├─ frontend/
+│  ├─ src/
+│  │  ├─ assets/
+│  │  ├─ router/
+│  │  ├─ services/
+│  │  ├─ stores/
+│  │  ├─ types/
+│  │  └─ views/
+│  ├─ package.json
+│  ├─ vite.config.ts
+│  └─ tsconfig.json
 ```
 
 ### 4.1 后端分层职责
@@ -143,6 +155,19 @@ ServiceMind/
 - `tests/`
   - 接口测试、服务测试、集成测试。
 
+### 4.2 前端分层职责
+
+- `src/views/`
+  - 页面级工作台，目前提供用户侧聊天联调界面。
+- `src/stores/`
+  - Pinia 状态层，管理会话 ID、消息列表、健康检查状态、发送状态和错误信息。
+- `src/services/`
+  - Axios 请求封装，对接 `/api/v1/health` 与 `/api/v1/chat/`。
+- `src/router/`
+  - Vue Router 入口，当前挂载单页工作台，后续可扩展管理端页面。
+- `src/types/`
+  - 前后端联调用到的统一响应、健康检查、聊天请求和聊天响应类型。
+
 ## 5. 开发环境要求
 
 ### 5.1 基础环境
@@ -161,7 +186,9 @@ ServiceMind/
 
 - `LLM_API_BASE`
 - `LLM_API_KEY`
+- `LLM_MODEL_NAME`
 - `EMBEDDING_MODEL_NAME`
+- `DATABASE_URL` 或 `MYSQL_HOST/MYSQL_PORT/MYSQL_USER/MYSQL_PASSWORD/MYSQL_DATABASE`
 - `MYSQL_HOST`
 - `MYSQL_PORT`
 - `MYSQL_USER`
@@ -173,18 +200,33 @@ ServiceMind/
 示例 `.env`：
 
 ```env
-LLM_API_BASE=https://api.deepseek.com
-LLM_API_KEY=your_api_key
-EMBEDDING_MODEL_NAME=BAAI/bge-small-zh-v1.5
+# 方式一：直接使用完整数据库连接串
+DATABASE_URL=mysql+pymysql://root:your_password@localhost:3306/servicemind
 
+# 方式二：使用拆分变量（未提供 DATABASE_URL 时生效）
 MYSQL_HOST=127.0.0.1
 MYSQL_PORT=3306
 MYSQL_USER=root
 MYSQL_PASSWORD=123456
 MYSQL_DATABASE=servicemind
 
+# DeepSeek API（OpenAI 兼容）
+LLM_API_BASE=https://api.deepseek.com
+LLM_API_KEY=your_api_key
+LLM_MODEL_NAME=deepseek-chat
+EMBEDDING_MODEL_NAME=BAAI/bge-small-zh-v1.5
+
 REDIS_HOST=127.0.0.1
 REDIS_PORT=6379
+```
+
+如果你使用本地 Ollama（例如 `qwen3`），可改为：
+
+```env
+LLM_API_BASE=http://127.0.0.1:11434/v1
+LLM_API_KEY=ollama
+LLM_MODEL_NAME=qwen3
+EMBEDDING_MODEL_NAME=BAAI/bge-small-zh-v1.5
 ```
 
 ## 6. 快速启动步骤
@@ -215,35 +257,108 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 6.3 当前阶段说明
+### 6.3 启动前端开发服务
 
-- 当前仓库已完成 `backend` 开发骨架。
-- `frontend` 暂未初始化，后续建议单独创建 React + TypeScript 工程。
-- 现阶段可先从后端接口、Agent 编排、RAG 与工具调用链路开始开发。
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-### 6.4 初始化知识库
+前端开发服务默认运行在 `http://127.0.0.1:5173/console/`，Vite 会把 `/api` 代理到 `http://127.0.0.1:8000`。
+
+### 6.4 构建前端并由后端托管
+
+```powershell
+cd frontend
+npm run build
+cd ../backend
+.venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+构建产物输出到 `frontend/dist/`。后端启动时若检测到该目录，会把前端工作台挂载到 `http://127.0.0.1:8000/console/`。
+
+### 6.5 当前阶段说明
+
+- 当前仓库已完成 `backend` 基础链路与 `frontend` Vue 工程初始化。
+- 前端已具备健康检查、聊天发送、会话 ID 展示、trace 展示、订单/物流/退款示例入口。
+- 当前前后端联调覆盖 `/api/v1/health`、`/api/v1/chat/`、知识库上传/分块/FAISS 向量索引/检索来源、订单工具、物流工具和工具日志。
+- 流式输出、复杂管理后台、人工接管 UI 仍属于后续增强范围。
+
+### 6.6 初始化知识库
 
 ```bash
 cd backend
-python scripts/build_kb.py --input ../data/raw --output ../data/vector_store
+python scripts/build_kb.py --input ../data/raw --report ../data/reports/kb_build_report.md --init-db
 ```
 
-### 6.5 可用性验证
+脚本会批量读取 `data/raw` 下的 `.txt` 和 `.md` 文件，清洗、切分、写入知识库并重建 `data/vector_store` 下的 FAISS 索引，同时输出处理报告。
+
+### 6.7 使用本地 Ollama Qwen 验证 RAG 回答
+
+`.env` 中配置本地 Qwen：
+
+```env
+LLM_API_BASE=http://127.0.0.1:11434/v1
+LLM_API_KEY=ollama
+LLM_MODEL_NAME=qwen3:8b
+LLM_TIMEOUT_SECONDS=120
+LLM_STRIP_THINKING=true
+```
+
+命令行验证：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\run_rag_chat.py "商品已经拆封还能直接退款吗？" --top-k 3 --source metadata
+```
+
+正常情况下会输出 `Answer source: rag_llm`、命中的知识库来源和 Qwen 生成的最终回答。
+
+评估本地 Qwen 的真实 RAG 回答质量：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\evaluate_answer.py --dataset ..\data\eval\answer_questions.json --report ..\data\reports\answer_eval_qwen.json --top-k 3 --source metadata --mode llm
+```
+
+评估订单/物流工具调用链路：
+
+```powershell
+cd backend
+.venv\Scripts\python.exe scripts\evaluate_tools.py --dataset ..\data\eval\tool_cases.json --report ..\data\reports\tool_eval_report.json --source ephemeral
+```
+
+### 6.8 可用性验证
 
 - 打开前端工作台页面
 - 发起一个商品、订单或物流类问题
 - 检查系统是否完成：
   - 意图识别
-  - 检索召回
+  - FAISS 向量召回或词法回退
+  - 知识来源展示
   - 工具调用
   - 答案生成
   - 日志落库
+
+本地验证命令：
+
+```powershell
+cd frontend
+npm run build
+
+cd ../backend
+.venv\Scripts\python.exe -m pytest
+.venv\Scripts\python.exe scripts\run_smoke.py --base-url http://127.0.0.1:8000
+```
 
 ## 7. 项目文档导航
 
 - 架构拆分与流程图：[architecture.md](/D:/pythoncode/ServiceMind/docs/architecture.md)
 - 开发手册与实现说明：[development-guide.md](/D:/pythoncode/ServiceMind/docs/development-guide.md)
 - MVP 方案与优先级：[mvp-plan.md](/D:/pythoncode/ServiceMind/docs/mvp-plan.md)
+- 阶段验证与评估结果：[evaluation-report.md](/D:/pythoncode/ServiceMind/docs/evaluation-report.md)
 
 ## 8. 推荐开发顺序
 
@@ -252,7 +367,9 @@ python scripts/build_kb.py --input ../data/raw --output ../data/vector_store
 3. 补 `session`、`message` 表结构与持久化逻辑，先实现会话保存与查询。
 4. 实现知识库导入、切分、向量化和基础检索，完成最小 RAG 闭环。
 5. 接入订单查询与物流查询两个高频工具，形成 `Agent + RAG + Tool` 主链路。
-6. 最后补投诉、工单、监控、评测和微调能力。
+6. 补离线数据处理 pipeline，支持批量清洗、分块、embedding、索引重建和处理报告。
+7. 补阶段验证链路，用固定问题集统计 Hit@1、Recall@K、MRR、回答可依据率和工具调用正确率。
+8. 最后补投诉、工单、监控看板、自动评测平台和微调能力。
 
 ## 9. 版本演进建议
 
